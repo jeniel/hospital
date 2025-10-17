@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mavenspring
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/jeniel/mavenspring.git
+    targetRevision: HEAD
+    path: appointmentservice
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default   # must match your Helm chart resources
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
