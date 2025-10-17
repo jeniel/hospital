@@ -1,8 +1,0 @@
-{{- /* templates/NOTES.txt */ -}}
-{{- if and .Values.httpRoute .Values.httpRoute.enabled }}
-Your HTTPRoute is enabled.
-You can access your application at: http://{{ .Release.Name }}.example.com
-{{- else }}
-HTTPRoute is disabled or not defined.
-{{- end }}
-
