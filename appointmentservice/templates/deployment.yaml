@@ -19,18 +19,4 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - containerPort: {{ .Values.service.targetPort }}
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: {{ .Values.appName }}-service
-  namespace: {{ .Values.namespace}}
-spec:
-  selector:
-    app: {{ .Values.appName }}
-  type: {{ .Values.service.type }}
-  ports:
-    - protocol: TCP
-      port: {{ .Values.service.port }}          # port sulod sa cluster
-      targetPort: {{ .Values.service.targetPort }}     # connect tp container
-      #nodePort: 30080 
+
