@@ -27,6 +27,7 @@ jobs:
           ${{ runner.os }}-node-
 
     - name: Install dependencies and build
+      working-directory: appointmentservice
       run: npm install && npm run build
 
     - name: Log in to DockerHub
