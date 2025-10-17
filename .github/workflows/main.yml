@@ -36,7 +36,7 @@ jobs:
       with:
         context: .
         push: true
-        tags: ${{ secrets.DOCKERHUB_USERNAME }}/mavenspring:${{ github.sha }}
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/hospital:${{ github.sha }}
 
     - name: Install yq
       run: sudo wget -qO /usr/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 && sudo chmod +x /usr/bin/yq
