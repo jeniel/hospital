@@ -1,18 +1,28 @@
 apiVersion: argoproj.io/v1alpha1
-kind: Application
+kind: ApplicationSet
 metadata:
-  name: hospi
+  name: hospital-applications
   namespace: argocd
 spec:
-  project: default
-  source:
-    repoURL: https://github.com/jeniel/hospital.git
-    targetRevision: HEAD
-    path: .
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: default   # must match your Helm chart resources
-  syncPolicy:
-    automated:
-      selfHeal: true
-      prune: true
+  generators:
+    - git:
+        repoURL: https://github.com/jeniel/hospital.git
+        directories:
+          - path: appointmentservice
+          - path: hospi
+  template:
+    metadata:
+      name: '{{path.basename}}'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/jeniel/hospital.git
+        path: '{{path}}'
+        targetRevision: HEAD
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{path.basename}}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
