@@ -9,6 +9,7 @@ spec:
         repoURL: https://github.com/jeniel/hospital.git
         directories:
           - path: appointmentservice
+          - path: hospi3
   template:
     metadata:
       name: '{{path.basename}}'
