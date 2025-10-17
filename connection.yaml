@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/jeniel/mavenspring.git
     targetRevision: HEAD
-    path: appointmentservice
+    path: .
   destination:
     server: https://kubernetes.default.svc
     namespace: default   # must match your Helm chart resources
