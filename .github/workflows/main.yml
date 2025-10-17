@@ -26,9 +26,15 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-node-
 
-    - name: Install dependencies and build
+    - name: Install dependencies
       working-directory: appointmentservice
-      run: npm install 
+      run: npm install
+
+    - name: Log in to DockerHub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
 
     - name: Build and push Docker image
       uses: docker/build-push-action@v4
@@ -39,7 +45,6 @@ jobs:
         tags: |
           ${{ secrets.DOCKERHUB_USERNAME }}/hospital:latest
           ${{ secrets.DOCKERHUB_USERNAME }}/hospital:${{ github.sha }}
-
 
     - name: Install yq
       run: sudo wget -qO /usr/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 && sudo chmod +x /usr/bin/yq
