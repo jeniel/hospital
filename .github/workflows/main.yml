@@ -46,26 +46,5 @@ jobs:
           ${{ secrets.DOCKERHUB_USERNAME }}/hospital:latest
           ${{ secrets.DOCKERHUB_USERNAME }}/hospital:${{ github.sha }}
 
-
-    - name: Update helm values                                                  # pangalan lang
-      run: |                                                                        # gi gamit for multi lines sa ubos taman naay indention
-        IMAGE=${{ secrets.DOCKERHUB_USERNAME }}/hospital                      # link sa secret_ user ug name sa gi deploy                   
-        TAG=${{ github.sha }}                                                      # e trace kung unsay version gi gamit sa app
-        yq eval -i ".image.repository = strenv(IMAGE)" appointmentservice/values.yaml            # gamit para mag update sa helm values
-        yq eval -i ".image.tag = strenv(TAG)" appointment/values.yaml
-        git config user.name "github-actions[bot]"
-        git config user.email "github-actions[bot]@users.noreply.github.com"
-        git add helm/values.yaml
-        git commit -m "ci: update image ${TAG}" || echo "no changes"
-        git push
-
-    - name: Build Docker image
-      run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/hospital:${{ github.sha }} .
-
-    - name: Push Docker image
-      run: |
-        echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
-        docker push ${{ secrets.DOCKERHUB_USERNAME }}/hospital:${{ github.sha }}  
-
     - name: Install yq
       run: sudo wget -qO /usr/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 && sudo chmod +x /usr/bin/yq
