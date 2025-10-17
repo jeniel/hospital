@@ -28,7 +28,7 @@ jobs:
 
     - name: Install dependencies and build
       working-directory: appointmentservice
-      run: npm install && npm run build
+      run: npm install 
 
     - name: Log in to DockerHub
       uses: docker/login-action@v2
