@@ -60,12 +60,12 @@ jobs:
         git push
 
     - name: Build Docker image
-      run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/mavenspring:${{ github.sha }} .
+      run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/hospital:${{ github.sha }} .
 
     - name: Push Docker image
       run: |
         echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
-        docker push ${{ secrets.DOCKERHUB_USERNAME }}/mavenspring:${{ github.sha }}  
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/hospital:${{ github.sha }}  
 
     - name: Install yq
       run: sudo wget -qO /usr/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 && sudo chmod +x /usr/bin/yq
