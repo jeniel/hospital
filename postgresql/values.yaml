@@ -1,0 +1,7 @@
+image: postgres:15
+postgresUser: hospital
+postgresPassword: hospitalpassword
+postgresDatabase: hospitaldb
+persistence:
+  enabled: true
+  size: 1Gi
