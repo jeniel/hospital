@@ -30,6 +30,14 @@ jobs:
       working-directory: appointmentservice
       run: npm install
 
+    - name: Build project
+      working-directory: appointmentservice
+      run: npm run build
+
+    - name: Run tests (optional)
+      working-directory: appointmentservice
+      run: npm test
+
     - name: Log in to DockerHub
       uses: docker/login-action@v2
       with:
