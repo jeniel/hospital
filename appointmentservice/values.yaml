@@ -2,7 +2,7 @@ namespace: appointment
 replicaCount: 1
 appName: appointment
 image:
-  repository: jeniel/appointment
+  repository: jeniel/apointment
 
   pullPolicy: IfNotPresent
 
